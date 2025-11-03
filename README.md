@@ -33,7 +33,7 @@ seo-content-detector/
 
 Setup Instructions
 1. Clone the repository
-git clone https://github.com/yourusername/seo-content-detector.git
+git clone https://github.com/jagannath12333/seo-content-detector.git
 cd seo-content-detector
 
 2. Install dependencies
