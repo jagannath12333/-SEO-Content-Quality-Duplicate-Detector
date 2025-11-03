@@ -2,80 +2,72 @@ SEO Content Quality and Duplicate Detector
 Overview
 
 This project analyzes web pages for SEO quality and duplicate detection using NLP and machine learning techniques.
-It evaluates content readability, sentiment, keyword density, and identifies near-duplicate URLs to determine overall content quality.
+It evaluates content readability, sentiment, and keyword density, and identifies near-duplicate URLs to assess overall content quality.
 
 Features
 
-Parses and cleans HTML content
+Parses and cleans raw HTML text
 
 Computes readability and sentiment metrics
 
-Detects duplicate or similar web pages using cosine similarity
+Detects near-duplicate content using cosine similarity
 
-Classifies content as High, Medium, or Low quality
+Classifies content into High, Medium, or Low quality categories
 
-Real-time analysis function to test new URLs
-
-Optional Streamlit web app for deployment
+Real-time URL analysis function for quick evaluation
 
 Project Structure
+
+All files are located in a single folder (no subdirectories):
+
 seo-content-detector/
-├── data/
-│   ├── data.csv
-│   ├── extracted_content.csv
-│   ├── features.csv
-│   └── duplicates.csv
-├── notebooks/
-│   └── seo_pipeline.ipynb
-├── streamlit_app/
-│   ├── app.py
-│   ├── models/
-│   │   ├── quality_model.pkl
-│   │   └── scaler.pkl
-│   └── utils/
+├── data.csv
+├── extracted_content.csv
+├── features.csv
+├── duplicates.csv
+├── seo_pipeline.ipynb
+├── quality_model.pkl
+├── scaler.pkl
 ├── requirements.txt
 └── README.md
 
 Setup Instructions
-
-Clone the repository:
-
+1. Clone the repository
 git clone https://github.com/yourusername/seo-content-detector.git
 cd seo-content-detector
 
-
-Install dependencies:
-
+2. Install dependencies
 pip install -r requirements.txt
 
+3. Run the Notebook
 
-Run locally:
+Open the Jupyter Notebook:
 
-streamlit run streamlit_app/app.py
+seo_pipeline.ipynb
+
+
+Run all cells to reproduce the full pipeline — including preprocessing, feature extraction, duplicate detection, model training, and evaluation.
 
 Key Decisions
 
-Libraries used: scikit-learn, BeautifulSoup4, TextBlob, TextStat
+Libraries used: scikit-learn, BeautifulSoup4, TextBlob, TextStat, Imbalanced-learn
 
-Similarity threshold for duplicates: 0.8
+Duplicate similarity threshold: 0.8 (cosine similarity)
 
-Model: RandomForestClassifier with GridSearchCV
+Classifier used: RandomForestClassifier (optimized using GridSearchCV)
 
-SMOTE used for class balancing
+Imbalance handling: SMOTE
 
-Features used for training: word count, char count, average word length, sentiment polarity, readability score
+Main features: word_count, char_count, avg_word_length, sentiment_polarity, flesch_reading_ease
 
 Results Summary
+Metric	Value
+Total Pages Analyzed	81
+Duplicate Pairs Found	25
+Final Model Accuracy	95%
+Labels Distribution	Low (50), Medium (27), High (4)
 
-Total pages analyzed: 81
-
-Duplicate pairs found: 25
-
-Model Accuracy: 95%
-
-Label distribution: Low (50), Medium (27), High (4)
-
-Top important features:
+Top 3 Most Important Features
 
 Word Count
 
@@ -83,21 +75,27 @@ Flesch Reading Ease
 
 Sentiment Polarity
 
+Outputs
+
+Full model performance, including classification report, confusion matrix, and feature importance plots, are available inside the GitHub repository.
+
+The trained model (quality_model.pkl) and scaler (scaler.pkl) are included for reproducibility.
+
 Limitations
 
-Small dataset size may limit generalization
+Dataset is small (81 rows) which limits model generalization.
 
-Readability metrics may vary for technical content
+Readability scores can vary across technical or marketing content.
 
-No deep contextual embedding (BERT or transformer-based models not used)
+No transformer-based embeddings (BERT) were used for semantic understanding.
 
-Future Improvements
+Future Enhancements
 
-Integrate transformer embeddings for better similarity detection
+Add transformer-based embeddings for advanced text representation.
 
-Add visualization dashboard for content quality trends
+Extend duplicate detection to multi-domain comparisons.
 
-Extend duplicate detection to domain-level comparison
+Automate quality monitoring for new content uploads.
 
 Author
 
